@@ -1,0 +1,152 @@
+---
+alwaysApply: true
+description: Regra para centralização de documentação no README.md como única fonte de verdade
+---
+
+# Centralização de Documentação
+
+## Princípio Fundamental
+**Toda a documentação do projeto deve estar no README.md** que é a única fonte de documentação.
+
+## Estrutura de Documentação
+
+### 1. README.md como Fonte Única
+- **README.md é a única fonte** de documentação do projeto
+- **Não criar arquivos .md separados** para documentação
+- **Centralizar todas as informações** em seções organizadas
+- **Manter histórico de decisões** e ações tomadas
+
+### 2. Estrutura do README.md
+
+#### Sumário Obrigatório:
+```markdown
+# Projeto [Nome]
+
+## Sumário
+- [Visão Geral](#visão-geral)
+- [Instalação](#instalação)
+- [Configuração](#configuração)
+- [Módulos](#módulos)
+  - [Admin](#admin)
+  - [API](#api)
+  - [Widget](#widget)
+- [Decisões Técnicas](#decisões-técnicas)
+- [Histórico de Mudanças](#histórico-de-mudanças)
+- [Troubleshooting](#troubleshooting)
+```
+
+#### Seções por Módulo:
+Cada módulo/área do sistema deve ter sua seção:
+- **Admin** - Frontend administrativo
+- **API** - Backend e endpoints
+- **Widget** - Widget embedável
+- **Infraestrutura** - Docker, deploy, etc.
+
+### 3. Padrões de Documentação
+
+#### Para Cada Módulo:
+```markdown
+## [Nome do Módulo]
+
+### Visão Geral
+[Descrição do módulo e sua função]
+
+### Funcionalidades
+- [Lista de funcionalidades principais]
+
+### Decisões Técnicas
+- [Decisões arquiteturais tomadas]
+- [Motivos das escolhas técnicas]
+- [Data da decisão]
+
+### Mudanças Recentes
+- [Lista de alterações com data]
+- [Impacto das mudanças]
+```
+
+#### Para Decisões Técnicas:
+```markdown
+## Decisões Técnicas
+
+### [Data] - [Título da Decisão]
+**Problema:** [Descrição do problema]
+**Solução:** [Solução escolhida]
+**Motivo:** [Por que esta solução]
+**Impacto:** [Consequências da decisão]
+**Alternativas Consideradas:** [Outras opções avaliadas]
+```
+
+### 4. Processo de Atualização
+
+#### Ao Fazer Mudanças:
+1. **Documente a mudança** no README.md
+2. **Atualize o sumário** se necessário
+3. **Adicione entrada** na seção de mudanças
+4. **Explique o motivo** da alteração
+
+#### Ao Tomar Decisões:
+1. **Registre a decisão** na seção apropriada
+2. **Documente o contexto** e alternativas
+3. **Inclua data** e responsável
+4. **Explique o impacto** esperado
+
+### 5. Exemplos de Estrutura
+
+#### Seção de Módulo:
+```markdown
+## Admin
+
+### Visão Geral
+Frontend administrativo desenvolvido em React com TypeScript para gerenciamento do sistema.
+
+### Funcionalidades
+- Autenticação de usuários
+- Dashboard de métricas
+- Gerenciamento de assistentes
+- Configuração de widgets
+
+### Decisões Técnicas
+- **2024-01-15** - Escolha do React + TypeScript
+  - Motivo: Type safety e ecosystem maduro
+  - Impacto: Desenvolvimento mais seguro e maintível
+
+### Mudanças Recentes
+- **2024-01-20** - Implementação de autenticação JWT
+- **2024-01-18** - Adição de dashboard de métricas
+```
+
+### 6. Benefícios
+
+#### Organização:
+- **Informação centralizada** em um local
+- **Fácil navegação** com sumário
+- **Histórico preservado** de decisões
+- **Contexto completo** do projeto
+
+#### Manutenção:
+- **Atualizações simples** em um arquivo
+- **Versionamento claro** das mudanças
+- **Rastreabilidade** de decisões
+- **Onboarding facilitado** para novos desenvolvedores
+
+### 7. Diretrizes de Escrita
+
+#### Linguagem:
+- **Português brasileiro** para documentação
+- **Clareza e objetividade** nas descrições
+- **Exemplos práticos** quando necessário
+- **Formatação consistente** em markdown
+
+#### Conteúdo:
+- **Sempre explique o "porquê"** das decisões
+- **Inclua contexto** suficiente para entender
+- **Mantenha histórico** de mudanças importantes
+- **Documente problemas conhecidos** e soluções
+
+### 8. Exceções Raras
+Arquivos .md separados são permitidos apenas para:
+- **Documentação de API** gerada automaticamente
+- **Changelog** de releases (se necessário)
+- **Documentação externa** de bibliotecas
+
+**Sempre com referência no README.md principal.**

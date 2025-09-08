@@ -1,0 +1,120 @@
+---
+alwaysApply: true
+description: Regra para arquitetura específica do projeto com 3 serviços separados
+---
+
+# Arquitetura do Projeto - 3 Serviços Separados
+
+## Visão Geral da Arquitetura
+Este é um **projeto misto** com 3 serviços separados que trabalham em conjunto para fornecer uma solução completa de chat inteligente.
+
+## Estrutura dos Serviços
+
+### 1. `/admin` - Frontend Administrativo
+- **Tecnologia:** React com Vite (gerado pelo Lovable)
+- **Função:** Área administrativa do sistema
+- **Responsabilidades:**
+  - Interface de gerenciamento do sistema
+  - Configuração de assistentes de chat
+  - Monitoramento de conversas
+  - Administração de usuários e permissões
+  - Dashboard de métricas e analytics
+
+### 2. `/api` - Backend Multitenant
+- **Tecnologia:** Python 3.12.10 com FastAPI
+- **Banco de Dados:** PostgreSQL
+- **ORM:** SQLModel
+- **Validação:** Pydantic
+- **Arquitetura:** Multitenant
+- **Responsabilidades:**
+  - API REST para comunicação entre serviços
+  - Interação com bancos de dados dos clientes
+  - Processamento de conversas de chat
+  - Gerenciamento de contexto empresarial
+  - Autenticação e autorização
+  - Integração com modelos de IA
+
+### 3. `/widget` - Widget Embedável
+- **Tecnologia:** Build de widget (gerado pelo Lovable)
+- **Função:** Widget de chat embedável para clientes
+- **Responsabilidades:**
+  - Interface de chat para usuários finais
+  - Integração com endpoints da `/api`
+  - Conversas sobre produtos e contexto empresarial
+  - Experiência de usuário otimizada
+  - Responsividade e acessibilidade
+
+## Fluxo de Dados e Comunicação
+
+### Fluxo Principal:
+1. **Cliente** usa o `/widget` embedado em seu site
+2. **Widget** faz requisições para `/api`
+3. **API** processa e retorna respostas baseadas no contexto
+4. **Admin** gerencia configurações que afetam o comportamento do chat
+5. **API** aplica configurações do admin nas conversas
+
+### Integrações:
+- `/widget` ↔ `/api` - Comunicação principal para chat
+- `/admin` ↔ `/api` - Gerenciamento e configuração
+- `/api` ↔ `PostgreSQL` - Persistência de dados
+- `/api` ↔ `Bancos dos Clientes` - Dados específicos por tenant
+
+## Decisões Arquiteturais
+
+### Multitenancy
+- **Implementação:** Isolamento por tenant na `/api`
+- **Benefício:** Cada cliente tem seus dados separados
+- **Segurança:** Controle de acesso por tenant
+
+### Separação de Responsabilidades
+- **Admin:** Interface administrativa
+- **API:** Lógica de negócio e processamento
+- **Widget:** Interface do usuário final
+- **Benefício:** Escalabilidade e manutenibilidade
+
+### Tecnologias Escolhidas
+- **React + Vite:** Performance e DX para admin
+- **Python + FastAPI:** Performance e facilidade para APIs
+- **SQLModel:** Type safety e integração com Pydantic
+- **PostgreSQL:** Robustez e recursos avançados
+
+## Estrutura de Desenvolvimento
+
+### Diretórios Principais:
+```
+/
+├── /admin          # Frontend administrativo (React + Vite)
+├── /api            # Backend multitenant (Python + FastAPI)
+├── /widget         # Widget embedável (Build Lovable)
+└── /nginx          # Configuração de proxy reverso
+```
+
+### Padrões de Desenvolvimento:
+- **Admin:** Componentes React, TypeScript, Tailwind CSS
+- **API:** Endpoints REST, modelos SQLModel, schemas Pydantic
+- **Widget:** Componentes otimizados para embed
+
+## Considerações de Deploy
+
+### Ambientes:
+- **Desenvolvimento:** Serviços rodando localmente
+- **Produção:** Containerização com Docker
+- **Proxy:** Nginx para roteamento entre serviços
+
+### Dependências:
+- **Admin** depende de endpoints da **API**
+- **Widget** depende de endpoints da **API**
+- **API** é o serviço central que conecta tudo
+
+## Manutenção e Evolução
+
+### Princípios:
+- **Cada serviço é independente** mas integrado
+- **Mudanças na API** podem afetar Admin e Widget
+- **Mudanças no Admin** afetam configuração do sistema
+- **Mudanças no Widget** afetam experiência do usuário final
+
+### Versionamento:
+- **API:** Versionamento de endpoints
+- **Admin:** Versionamento de features
+- **Widget:** Versionamento de builds

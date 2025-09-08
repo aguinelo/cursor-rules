@@ -1,0 +1,120 @@
+---
+alwaysApply: true
+description: Regra para tratamento rigoroso de erros e warnings sem ignorar sem explicação
+---
+
+# Tratamento Rigoroso de Erros e Warnings
+
+## Princípio Fundamental
+**NUNCA ignore erros ou warnings sem explicação clara e justificada.**
+
+## Diretrizes Obrigatórias
+
+### 1. Erros de Qualquer Linguagem
+- **Todos os erros devem ser tratados** ou comentados com motivo
+- **Nunca deixe erros sem explicação** no código
+- **Documente o motivo** quando um erro for intencionalmente ignorado
+
+### 2. Warnings = Erros
+- **Trate warnings como erros** - eles indicam problemas potenciais
+- **Corrija warnings** sempre que possível
+- **Se não puder corrigir**, documente o motivo claramente
+
+### 3. Padrões de Documentação
+
+#### Para Erros Ignorados Intencionalmente:
+```typescript
+// @ts-ignore - Ignorado porque [motivo específico]
+// Exemplo: API externa retorna tipo incorreto conhecido
+const data = apiResponse as ExpectedType;
+
+// eslint-disable-next-line [regra] - [motivo específico]
+// Exemplo: Necessário para compatibilidade com versão antiga
+const legacyCode = oldFunction();
+```
+
+#### Para Warnings Documentados:
+```python
+# pylint: disable=unused-argument
+# Motivo: Argumento necessário para interface, mas não usado nesta implementação
+def callback_function(event, unused_param):
+    pass
+```
+
+### 4. Processo de Resolução
+
+#### Antes de Ignorar Qualquer Erro/Warning:
+1. **Tente corrigir** primeiro
+2. **Pesquise soluções** alternativas
+3. **Se não conseguir corrigir**, documente o motivo
+4. **Use comentários específicos** explicando a situação
+
+#### Estrutura de Comentário Obrigatória:
+```
+// [Tipo de erro/warning] - [Motivo específico]
+// [Contexto adicional se necessário]
+// [Data da decisão se relevante]
+```
+
+### 5. Tipos de Erros Comuns
+
+#### TypeScript/JavaScript:
+- `@ts-ignore` - Use apenas com motivo claro
+- `eslint-disable` - Documente a regra específica e motivo
+- `any` types - Evite, use tipos específicos quando possível
+
+#### Python:
+- `# pylint: disable` - Especifique a regra e motivo
+- `# type: ignore` - Explique por que o tipo está incorreto
+- Exceptions não tratadas - Sempre capture e trate
+
+#### Outras Linguagens:
+- **C/C++**: `#pragma` com comentários explicativos
+- **Java**: `@SuppressWarnings` com motivo
+- **Go**: `//nolint` com regra específica
+
+### 6. Exemplos de Boas Práticas
+
+#### ✅ Correto:
+```typescript
+// @ts-ignore - API externa retorna 'unknown' mas sabemos que é string
+// Documentado em: https://api-docs.com/issue-123
+const userId = apiResponse.userId as string;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// Motivo: Biblioteca externa não tem tipos definidos
+const externalLibData: any = externalLibrary.getData();
+```
+
+#### ❌ Incorreto:
+```typescript
+// @ts-ignore
+const data = apiResponse;
+
+// eslint-disable-next-line
+const result = someFunction();
+```
+
+### 7. Validação Contínua
+
+#### Checklist Antes de Commit:
+- [ ] Todos os erros foram tratados ou documentados
+- [ ] Todos os warnings foram corrigidos ou explicados
+- [ ] Comentários explicam o motivo específico
+- [ ] Não há supressões genéricas sem contexto
+
+### 8. Benefícios
+- **Código mais confiável** e maintível
+- **Reduz bugs** em produção
+- **Facilita debugging** futuro
+- **Melhora qualidade** geral do projeto
+- **Documenta decisões** técnicas importantes
+
+### 9. Exceções Raras
+Erros podem ser ignorados apenas quando:
+- **API externa** com comportamento conhecido
+- **Legacy code** que será refatorado em breve
+- **Limitação da linguagem** documentada
+- **Performance crítica** com trade-off justificado
+
+**Sempre com comentário explicativo detalhado.**

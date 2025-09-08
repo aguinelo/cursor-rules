@@ -1,0 +1,156 @@
+---
+alwaysApply: true
+description: Regra para manutenção obrigatória do README.md e CHANGELOG.md a cada nova funcionalidade
+---
+
+# Manutenção Obrigatória de Documentação
+
+## Princípio Fundamental
+**SEMPRE atualize o README.md e CHANGELOG.md a cada nova funcionalidade** para manter o projeto sempre atualizado e bem contextualizado.
+
+## Processo Obrigatório
+
+### 1. Atualização do README.md
+**Antes de cada commit de funcionalidade:**
+
+#### Seções que DEVEM ser atualizadas:
+- **Sumário** - Adicionar novas seções se necessário
+- **Funcionalidades** - Listar novas funcionalidades implementadas
+- **Instalação/Configuração** - Se houver mudanças nos requisitos
+- **Decisões Técnicas** - Documentar escolhas arquiteturais
+- **Exemplos de Uso** - Incluir exemplos práticos das novas funcionalidades
+
+#### Estrutura de Atualização:
+```markdown
+## Funcionalidades
+- [Funcionalidade existente]
+- ✅ **NOVA:** [Nome da funcionalidade] - [Breve descrição]
+  - [Detalhes da implementação]
+  - [Como usar]
+  - [Exemplo prático]
+```
+
+### 2. Atualização do CHANGELOG.md
+**Obrigatório para TODA funcionalidade:**
+
+#### Formato Padrão:
+```markdown
+# Changelog
+
+## [Versão] - [Data]
+### Adicionado
+- [Nova funcionalidade 1]
+- [Nova funcionalidade 2]
+
+### Modificado
+- [Funcionalidade existente modificada]
+
+### Corrigido
+- [Bug corrigido]
+
+### Removido
+- [Funcionalidade removida]
+```
+
+#### Detalhamento Obrigatório:
+- **Data da alteração**
+- **Tipo de mudança** (Adicionado/Modificado/Corrigido/Removido)
+- **Descrição clara** do que foi feito
+- **Impacto** na funcionalidade existente
+- **Breaking changes** se houver
+
+### 3. Checklist de Documentação
+
+#### Antes de cada commit:
+- [ ] README.md atualizado com nova funcionalidade
+- [ ] CHANGELOG.md atualizado com entrada detalhada
+- [ ] Exemplos práticos incluídos
+- [ ] Decisões técnicas documentadas
+- [ ] Impacto nas funcionalidades existentes explicado
+
+#### Após cada commit:
+- [ ] Verificar se a documentação está clara
+- [ ] Confirmar que exemplos funcionam
+- [ ] Validar que não há informações desatualizadas
+
+### 4. Padrões de Escrita
+
+#### Para README.md:
+- **Linguagem clara e objetiva**
+- **Exemplos práticos** sempre que possível
+- **Estrutura consistente** com sumário atualizado
+- **Links funcionais** para seções internas
+
+#### Para CHANGELOG.md:
+- **Cronologia clara** das mudanças
+- **Categorização** por tipo de alteração
+- **Descrições específicas** do que foi alterado
+- **Referências** a issues/PRs quando aplicável
+
+### 5. Exemplos de Atualizações
+
+#### README.md - Nova Funcionalidade:
+```markdown
+## Funcionalidades
+
+### Autenticação
+- Login de usuários
+- Gerenciamento de sessões
+- ✅ **NOVA:** Autenticação OAuth2
+  - Integração com Google, GitHub e Microsoft
+  - Configuração via painel administrativo
+  - Exemplo: `POST /auth/oauth2/google`
+
+### Chat
+- Conversas em tempo real
+- ✅ **NOVA:** Histórico de conversas
+  - Busca por data e conteúdo
+  - Exportação em PDF
+  - Exemplo: `GET /conversations/search?q=produto`
+```
+
+#### CHANGELOG.md - Entrada Detalhada:
+```markdown
+## [1.2.0] - 2024-01-20
+
+### Adicionado
+- Autenticação OAuth2 com Google, GitHub e Microsoft
+- Histórico de conversas com busca e filtros
+- Exportação de conversas em formato PDF
+- Dashboard de métricas em tempo real
+
+### Modificado
+- Interface de login para suportar múltiplos provedores
+- API de conversas para incluir metadados de busca
+- Performance do sistema de notificações
+
+### Corrigido
+- Erro de validação em campos de data
+- Problema de timeout em conversas longas
+```
+
+### 6. Benefícios
+
+#### Para Desenvolvedores:
+- **Contexto completo** do projeto sempre disponível
+- **Histórico claro** de mudanças e evolução
+- **Facilita onboarding** de novos membros da equipe
+- **Reduz dúvidas** sobre funcionalidades
+
+#### Para Usuários:
+- **Documentação sempre atualizada**
+- **Exemplos práticos** de uso
+- **Changelog claro** das melhorias
+- **Transparência** nas mudanças
+
+### 7. Exceções
+Esta regra pode ser flexibilizada apenas para:
+- **Commits de correção de formatação**
+- **Commits de documentação** (quando não há mudança de funcionalidade)
+- **Commits de teste** sem impacto em produção
+
+### 8. Validação
+- **Sempre revisar** a documentação antes do commit
+- **Testar exemplos** incluídos na documentação
+- **Verificar links** e referências
+- **Confirmar clareza** das explicações

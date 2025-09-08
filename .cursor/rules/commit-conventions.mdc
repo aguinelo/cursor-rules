@@ -1,0 +1,98 @@
+---
+alwaysApply: true
+description: Regra para padronização de commits com mensagens convencionais
+---
+
+# Padronização de Commits
+
+## Princípio Fundamental
+**Cada tarefa = 1 commit** com mensagem no formato convencional.
+
+## Formato de Mensagens de Commit
+
+### Estrutura Obrigatória
+```
+feat: [ação realizada]
+fix: [problema resolvido]
+```
+
+### Tipos de Commit Permitidos
+
+#### `feat:` - Novas funcionalidades
+- Use para adicionar novas funcionalidades
+- Exemplos:
+  - `feat: adicionar autenticação JWT`
+  - `feat: implementar dashboard de usuários`
+  - `feat: criar endpoint de upload de arquivos`
+
+#### `fix:` - Correções de bugs
+- Use para corrigir problemas existentes
+- Exemplos:
+  - `fix: corrigir validação de email`
+  - `fix: resolver erro de conexão com banco`
+  - `fix: ajustar cálculo de preços`
+
+### Diretrizes de Escrita
+
+1. **Use verbos no infinitivo** (adicionar, implementar, corrigir, resolver)
+2. **Seja específico e claro** sobre o que foi feito
+3. **Mantenha a mensagem concisa** (máximo 50 caracteres)
+4. **Use minúsculas** para o tipo e descrição
+5. **Não use ponto final** na mensagem
+
+### Exemplos Corretos
+```
+feat: adicionar sistema de notificações
+feat: implementar autenticação OAuth
+fix: corrigir erro de validação de senha
+fix: resolver problema de performance na consulta
+feat: criar componente de upload de imagens
+fix: ajustar responsividade do layout
+```
+
+### Exemplos Incorretos
+```
+❌ feat: Adicionar sistema de notificações.
+❌ feat: Sistema de notificações
+❌ fix: Bug na validação
+❌ feat: add notification system
+❌ fix: correção de bug
+```
+
+## Processo de Commit
+
+### Antes de cada commit:
+1. **Verifique se a tarefa está completa**
+2. **Teste a funcionalidade** antes de commitar
+3. **Revise as alterações** com `git diff`
+4. **Escreva a mensagem** seguindo o formato
+
+### Comandos Recomendados
+```bash
+# Verificar alterações
+git status
+git diff
+
+# Adicionar arquivos específicos
+git add arquivo1.ext arquivo2.ext
+
+# Commit com mensagem padronizada
+git commit -m "feat: implementar funcionalidade X"
+
+# Ou para correções
+git commit -m "fix: resolver problema Y"
+```
+
+## Benefícios
+- **Histórico claro** e organizado
+- **Facilita rastreamento** de mudanças
+- **Padronização** entre desenvolvedores
+- **Automação** de changelog e releases
+- **Melhor comunicação** sobre mudanças
+
+## Exceções
+Esta regra pode ser flexibilizada apenas para:
+- Commits de merge automáticos
+- Commits de correção de formatação (usar `style:`)
+- Commits de documentação (usar `docs:`)
+- Commits de teste (usar `test:`)

@@ -1,0 +1,75 @@
+---
+alwaysApply: true
+description: Regra para desenvolvimento incremental e divisão de prompts grandes
+---
+
+# Desenvolvimento Incremental e Gestão de Escopo
+
+## Princípio Fundamental
+**SEMPRE implemente uma funcionalidade por vez.** Divida prompts grandes e confirme o escopo antes de gerar código.
+
+## Diretrizes de Implementação
+
+### 1. Análise de Escopo
+- Antes de qualquer implementação, analise o escopo completo da solicitação
+- Identifique todas as funcionalidades envolvidas
+- Liste os arquivos que serão criados ou modificados
+- Estime a complexidade de cada componente
+
+### 2. Divisão de Prompts Grandes
+Quando receber um prompt que envolve múltiplas funcionalidades:
+
+1. **Identifique as funcionalidades distintas**
+2. **Priorize por dependências** (o que precisa ser feito primeiro)
+3. **Confirme o escopo** antes de começar qualquer implementação
+4. **Implemente uma funcionalidade por vez**
+5. **Teste cada funcionalidade** antes de prosseguir para a próxima
+
+### 3. Processo de Confirmação
+Antes de gerar código, sempre:
+- Resuma o que será implementado
+- Liste os arquivos que serão alterados/criados
+- Confirme se o escopo está correto
+- Aguarde aprovação antes de prosseguir
+
+### 4. Estrutura de Resposta
+Para prompts complexos, use esta estrutura:
+
+```
+## Análise do Escopo
+[Descrição do que foi solicitado]
+
+## Funcionalidades Identificadas
+1. [Funcionalidade 1]
+2. [Funcionalidade 2]
+3. [Funcionalidade N]
+
+## Arquivos que Serão Alterados/Criados
+- [arquivo1.ext] - [descrição da alteração]
+- [arquivo2.ext] - [descrição da alteração]
+
+## Plano de Implementação
+1. [Primeira funcionalidade] - [justificativa da prioridade]
+2. [Segunda funcionalidade] - [dependências]
+3. [Próximas funcionalidades...]
+
+Posso prosseguir com a implementação da primeira funcionalidade?
+```
+
+### 5. Validação Contínua
+- Após cada funcionalidade implementada, valide se está funcionando
+- Confirme se não quebrou funcionalidades existentes
+- Peça feedback antes de prosseguir para a próxima funcionalidade
+
+## Exceções
+Esta regra pode ser ignorada apenas quando:
+- O usuário explicitamente solicitar implementação completa
+- A funcionalidade for trivial (< 50 linhas de código)
+- For uma correção de bug simples e isolada
+
+## Benefícios
+- Reduz riscos de introduzir bugs
+- Facilita debugging e manutenção
+- Permite feedback incremental
+- Melhora a qualidade do código final
+- Evita retrabalho desnecessário

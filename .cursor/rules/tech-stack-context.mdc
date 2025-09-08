@@ -1,0 +1,206 @@
+---
+alwaysApply: true
+description: Contexto da stack tecnológica do projeto Agent Maker
+---
+
+# Stack Tecnológica - Agent Maker
+
+## Visão Geral do Projeto
+Este é um projeto de **API de Chat com Assistentes de IA** que permite treinar assistentes inteligentes com base de conhecimento através de upload de arquivos ou treinamento via endpoint.
+
+## Stack Principal
+
+### Backend Framework
+- **FastAPI** - Framework web moderno e rápido para APIs Python
+- **Python 3.12.10** - Linguagem principal do projeto (versão específica)
+- **Virtual Environment (venv)** - Ambiente virtual obrigatório para desenvolvimento
+- **Uvicorn** - Servidor ASGI para produção
+
+### Banco de Dados
+- **PostgreSQL** - Banco de dados relacional principal
+- **SQLModel** - ORM moderno que combina SQLAlchemy + Pydantic
+- **Alembic** - Migrações de banco de dados
+
+### Vector Database
+- **Qdrant** - Banco de dados vetorial para busca semântica e RAG
+- Usado para armazenar embeddings dos documentos de conhecimento
+- Suporte a busca por similaridade para recuperação de contexto
+
+### Validação e Serialização
+- **Pydantic** - Validação de dados e serialização JSON
+- **SQLModel** - Integração entre modelos de banco e validação
+
+## Funcionalidades Principais
+
+### Treinamento de Assistentes
+- **Upload de arquivos** para criação de base de conhecimento
+- **Treinamento via endpoint** para dados estruturados
+- **Processamento de documentos** (PDF, TXT, DOCX, etc.)
+- **Geração de embeddings** para busca semântica
+
+### Sistema de Chat
+- **API REST** para comunicação com assistentes
+- **Contexto conversacional** mantido por sessão
+- **RAG (Retrieval-Augmented Generation)** para respostas baseadas em conhecimento
+- **Streaming de respostas** para melhor UX
+
+### Gerenciamento de Conhecimento
+- **Indexação de documentos** no Qdrant
+- **Busca semântica** por similaridade
+- **Metadados** para categorização e filtros
+- **Versionamento** de bases de conhecimento
+
+## Arquitetura de Dados
+
+### PostgreSQL (Dados Relacionais)
+- Usuários e autenticação
+- Sessões de chat
+- Metadados de documentos
+- Configurações de assistentes
+- Logs e auditoria
+
+### Qdrant (Dados Vetoriais)
+- Embeddings de documentos
+- Metadados de chunks de texto
+- Índices para busca semântica
+- Coleções por assistente/projeto
+
+## Padrões de Desenvolvimento
+
+### Estrutura de Projeto
+```
+/api/
+├── models/          # SQLModel models
+├── schemas/         # Pydantic schemas
+├── services/        # Lógica de negócio
+├── endpoints/       # FastAPI routes
+├── database/        # Configuração do banco
+├── vector_db/       # Integração com Qdrant
+└── utils/           # Utilitários gerais
+```
+
+### Convenções de Código
+- **Type hints** obrigatórios em todas as funções
+- **Async/await** para operações I/O
+- **Dependency injection** com FastAPI
+- **Error handling** padronizado com HTTPException
+- **Logging** estruturado para debugging
+- **Virtual Environment** sempre ativado para desenvolvimento e testes
+
+### Integração com IA
+- **OpenAI API** ou **Anthropic Claude** para geração de respostas
+- **Embeddings** para busca semântica
+- **Chunking** inteligente de documentos
+- **Context window** otimizado para modelos
+
+## Considerações de Performance
+
+### Otimizações
+- **Connection pooling** para PostgreSQL
+- **Batch processing** para uploads grandes
+- **Caching** de embeddings frequentes
+- **Async operations** para I/O não-bloqueante
+
+### Escalabilidade
+- **Horizontal scaling** com múltiplas instâncias
+- **Load balancing** para distribuição de carga
+- **Database sharding** por tenant se necessário
+- **CDN** para arquivos estáticos
+
+## Segurança
+
+### Autenticação e Autorização
+- **JWT tokens** para autenticação
+- **RBAC** (Role-Based Access Control)
+- **Rate limiting** para prevenir abuse
+- **CORS** configurado adequadamente
+
+### Proteção de Dados
+- **Validação rigorosa** de uploads
+- **Sanitização** de conteúdo
+- **Encryption** de dados sensíveis
+- **Audit logs** para compliance
+
+## Monitoramento e Observabilidade
+
+### Logging
+- **Structured logging** com contexto
+- **Request/Response** logging
+- **Error tracking** centralizado
+- **Performance metrics**
+
+### Health Checks
+- **Database connectivity**
+- **Qdrant availability**
+- **External API status**
+- **System resources**
+
+## Desenvolvimento Local
+
+### Setup Obrigatório
+- **Virtual Environment (venv)** - **SEMPRE ativar antes de qualquer operação**
+- **Python 3.12.10** - Versão específica obrigatória
+- **Docker Compose** para serviços dependentes (PostgreSQL, Qdrant)
+- **Environment variables** para configuração
+- **Hot reload** durante desenvolvimento
+
+### Comandos Essenciais
+```bash
+# Ativar ambiente virtual (OBRIGATÓRIO)
+source venv/bin/activate
+
+# Verificar versão do Python
+python --version  # Deve retornar 3.12.10
+
+# Instalar dependências
+pip install -r requirements.txt
+
+# Executar testes
+pytest
+
+# Executar aplicação
+uvicorn main:app --reload
+```
+
+### ⚠️ IMPORTANTE - Ambiente Virtual
+- **SEMPRE ativar o venv** antes de executar qualquer comando Python
+- **Nunca executar** testes ou aplicação sem o venv ativado
+- **Verificar** se o venv está ativo antes de instalar dependências
+- **Usar** `which python` para confirmar que está usando o Python do venv
+
+### Dependências Principais
+```python
+fastapi>=0.104.0
+sqlmodel>=0.0.14
+psycopg2-binary>=2.9.7
+qdrant-client>=1.6.0
+pydantic>=2.5.0
+uvicorn[standard]>=0.24.0
+alembic>=1.12.0
+```
+
+## Decisões Arquiteturais
+
+### Por que FastAPI?
+- Performance superior com async/await
+- Type hints nativos e validação automática
+- Documentação automática (OpenAPI/Swagger)
+- Ecosystem maduro para APIs Python
+
+### Por que SQLModel?
+- Combina benefícios do SQLAlchemy + Pydantic
+- Type safety end-to-end
+- Validação automática de dados
+- Migração simples do SQLAlchemy
+
+### Por que Qdrant?
+- Performance superior para busca vetorial
+- API REST nativa
+- Suporte a metadados complexos
+- Escalabilidade horizontal
+
+### Por que PostgreSQL?
+- Robustez e confiabilidade
+- Suporte completo a ACID
+- Extensões úteis (JSON, Full-text search)
+- Ecosystem maduro e estável
